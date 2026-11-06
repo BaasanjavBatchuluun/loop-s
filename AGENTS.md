@@ -18,9 +18,26 @@ If the task seems to need a change in someone else's file, don't make it. Stop a
 ## Shared contract (do not break)
 
 - `game` in `js/state.js` is the only shared state. Don't create other global state.
-- `items` and `flags` reset every loop. `clues` persist across loops. That rule is the whole game, so never clear `clues` on reset.
-- Room → `onObjectClick(id)` → puzzles → state functions (`addItem`, `addClue`, …) → `render()`.
-- Don't rename or remove anything in `game` or these functions without an agreement on the issue first.
+- `items`, `flags`, `message` and `won` reset every loop. `clues` persist across loops. That rule is the whole game, so never clear `clues` on reset.
+- Don't rename or remove anything below without an agreement on the issue first.
+
+**Who defines what**
+
+| Name | Defined in | Called by | Does |
+|---|---|---|---|
+| `buildRoom()` | `room.js` | `main.js`, once at startup | Creates the clickable objects inside `#room` |
+| `onObjectClick(id)` | `puzzles.js` | `room.js`, on every click | Runs the puzzle logic for that object |
+| `startLoop()` / `resetLoop()` | `state.js` | `main.js` / the timer | Starts the 60s timer / resets when it hits 0 |
+| `addItem(id)`, `hasItem(id)`, `addClue(text)`, `setFlag(name, value)`, `say(text)` | `state.js` | `puzzles.js` | Change state, then call `render()` |
+| `render()` | `ui.js` | `state.js`, after every change and every tick | Redraws the HUD, inventory, journal, message, room states and win screen from `game` |
+
+**Object ids** (used by both room and puzzles): `note`, `painting`, `cabinet`, `photo`, `computer`, `door`. Decoy objects use any other id. `onObjectClick` should just `say()` something for them.
+
+**Flags** (`game.flags`): `paintingClicks` (number), `paintingMoved`, `cabinetOpen`, `doorUnlocked` (booleans). `render()` uses these to show visual states, for example adding the class `open` to `#obj-cabinet`.
+
+**Items**: `key`.
+
+**DOM ids**: `#timer`, `#loop-count`, `#room`, `#inventory`, `#journal` (already in `index.html`), plus `#message`. Each object element gets the id `obj-<id>`, for example `#obj-painting`.
 
 ## Tech rules
 

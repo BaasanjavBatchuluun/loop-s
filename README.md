@@ -21,7 +21,7 @@ Each person owns one file, which keeps merge conflicts rare.
 | Area | Files | Owner |
 |---|---|---|
 | Core loop: timer, reset, knowledge that persists | `js/state.js`, `js/main.js` | @BaasanjavBatchuluun |
-| Room & objects: layout, art, clickable objects | `js/room.js`, `assets/` | _TBD_ |
+| Room & objects: layout, art, clickable objects | `js/room.js`, `assets/` | @abdullahwaseem6 |
 | Puzzles: painting, cabinet, photo, computer, door | `js/puzzles.js` | @BaasanjavBatchuluun |
 | UI: HUD, inventory, clue journal, end screens | `js/ui.js`, `style.css` | @abdullahwaseem6 |
 
@@ -36,6 +36,7 @@ Room calls `onObjectClick(id)`, and puzzles call the state functions (`addItem`,
 
 ## Workflow
 
+- Starting with an AI agent? Give it your brief from `briefs/` as the first message.
 - Using an AI agent? It must follow `AGENTS.md`. Claude Code loads it automatically through `CLAUDE.md`, and most other agents read `AGENTS.md` directly.
 
 - Make a branch for each issue (`git switch -c timer`), then open a PR into `main`.
