@@ -20,10 +20,10 @@ Each person owns one file, which keeps merge conflicts rare.
 
 | Area | Files | Owner |
 |---|---|---|
-| Core loop: timer, reset, knowledge that persists | `js/state.js`, `js/main.js` | _TBD_ |
+| Core loop: timer, reset, knowledge that persists | `js/state.js`, `js/main.js` | @BaasanjavBatchuluun |
 | Room & objects: layout, art, clickable objects | `js/room.js`, `assets/` | _TBD_ |
-| Puzzles: painting, cabinet, photo, computer, door | `js/puzzles.js` | _TBD_ |
-| UI: HUD, inventory, clue journal, end screens | `js/ui.js`, `style.css` | _TBD_ |
+| Puzzles: painting, cabinet, photo, computer, door | `js/puzzles.js` | @BaasanjavBatchuluun |
+| UI: HUD, inventory, clue journal, end screens | `js/ui.js`, `style.css` | @abdullahwaseem6 |
 
 ## Shared contract
 
