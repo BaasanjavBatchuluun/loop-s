@@ -36,5 +36,7 @@ Room calls `onObjectClick(id)`, and puzzles call the state functions (`addItem`,
 
 ## Workflow
 
+- Using an AI agent? It must follow `AGENTS.md`. Claude Code loads it automatically through `CLAUDE.md`, and most other agents read `AGENTS.md` directly.
+
 - Make a branch for each issue (`git switch -c timer`), then open a PR into `main`.
 - Don't push to `main` directly.
