@@ -10,5 +10,47 @@ const game = {
   won: false,
 };
 
-// TODO: startLoop(), resetLoop(), addItem(id), hasItem(id), addClue(text), setFlag(name, value), say(text)
-// Every one of these must call render() after changing game. See AGENTS.md "Shared contract".
+function startLoop() {
+  const loop = game.loop;
+  game.timeLeft = 60;
+  const timer = setInterval(() => {
+    if (game.won || game.loop !== loop) return clearInterval(timer);  // no global handle: a finished loop's timer stops itself
+    game.timeLeft--;
+    if (game.timeLeft <= 0) resetLoop();
+    else render();
+  }, 1000);
+  render();
+}
+
+function resetLoop() {
+  game.items = [];
+  game.flags = {};
+  game.message = "";
+  game.won = false;
+  game.loop++;  // never touch game.clues here
+  startLoop();
+}
+
+function addItem(id) {
+  game.items.push(id);
+  render();
+}
+
+function hasItem(id) {
+  return game.items.includes(id);
+}
+
+function addClue(text) {
+  if (!game.clues.includes(text)) game.clues.push(text);
+  render();
+}
+
+function setFlag(name, value) {
+  game.flags[name] = value;
+  render();
+}
+
+function say(text) {
+  game.message = text;
+  render();
+}

@@ -1,2 +1,7 @@
 // Wires everything together. Keep this tiny.
-// TODO: call startLoop() once all modules exist.
+// TEMP STUBS: delete once room.js / ui.js are merged
+if (typeof render === "undefined") window.render = () => console.log(JSON.stringify(game));
+if (typeof buildRoom === "undefined") window.buildRoom = () => {};
+
+buildRoom();
+startLoop();
