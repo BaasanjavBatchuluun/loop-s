@@ -20,6 +20,16 @@ If they didn't give a name, ask for it. If the name isn't in the table, ask who 
 
 These rules apply to every agent working in this repo (Claude Code, Codex, Copilot, Cursor, and others). Read `README.md` first for how the game works.
 
+## Ponytail mode (required)
+
+Every agent works in **ponytail mode**: build the laziest solution that works.
+
+1. Before writing anything, ask: does this need to exist? Is it already in the repo? Does plain JS, CSS or HTML already do it? Then write the minimum code that works.
+2. Don't add abstractions, classes, config or helpers "for later". Fewest files and the shortest diff win, but only after you understand the code you're changing.
+3. Mark deliberate shortcuts with `// ponytail: <limit>, <upgrade path>`.
+4. Never cut validation, error handling, accessibility basics, or anything the brief asks for.
+5. After code, give at most three short lines of explanation.
+
 ## Stay in your lane
 
 Four people (and their agents) work here at the same time, each in their own files. Only edit the files that belong to the issue you're working on:
