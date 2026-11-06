@@ -6,6 +6,16 @@ You're trapped in a room with 60 seconds to escape. When the timer hits zero the
 
 Open `index.html` in a browser. No install or build step.
 
+## Getting started (team)
+
+```bash
+git clone https://github.com/zaid-akroush/timeloop-escape.git
+cd timeloop-escape
+claude        # or your agent of choice
+```
+
+Then just tell the agent your name (for example "I'm Abdullah"). It looks up your brief in `briefs/` and starts on your part.
+
 ## Escape sequence (first room)
 
 1. Find the clue **"BLUE - 4"**, then click the blue painting 4 times. It moves aside and reveals a key.
@@ -36,7 +46,6 @@ Room calls `onObjectClick(id)`, and puzzles call the state functions (`addItem`,
 
 ## Workflow
 
-- Starting with an AI agent? Give it your brief from `briefs/` as the first message.
 - Using an AI agent? It must follow `AGENTS.md`. Claude Code loads it automatically through `CLAUDE.md`, and most other agents read `AGENTS.md` directly.
 
 - Make a branch for each issue (`git switch -c timer`), then open a PR into `main`.

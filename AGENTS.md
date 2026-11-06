@@ -1,5 +1,22 @@
 # Instructions for AI coding agents
 
+## Start here: who are you working for?
+
+The human will start the session by telling you their name. Match it to a brief, ignoring case and spelling variants, and follow that brief:
+
+| Name (any of) | Brief |
+|---|---|
+| Abdullah, Abdallah, abdullahwaseem6 | `briefs/abdullah.md` |
+| Baasanjav, BaasanjavBatchuluun | `briefs/baasanjav.md` |
+
+Then:
+1. Run `git switch main && git pull` to get the latest code.
+2. Read `README.md`, the rest of this file, and the brief.
+3. Create or switch to the branch named in the brief.
+4. Tell the human in 2–3 lines which issues and files you're taking, then start working.
+
+If they didn't give a name, ask for it. If the name isn't in the table, ask who they are and don't edit anything. A teammate without a brief should ask zaid-akroush to add one.
+
 These rules apply to every agent working in this repo (Claude Code, Codex, Copilot, Cursor, and others). Read `README.md` first for how the game works.
 
 ## Stay in your lane

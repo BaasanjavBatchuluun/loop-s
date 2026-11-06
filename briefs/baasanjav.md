@@ -1,6 +1,6 @@
 # Agent brief: Baasanjav (game mechanics)
 
-> Paste this whole file into your AI agent as its first message, from inside the repo folder.
+> The agent loads this automatically when you tell it your name (see `AGENTS.md`). Work on branch `issue-1-3-mechanics`.
 
 You're helping build **Time Loop Escape**, a browser game. The player has 60 seconds to escape a room. When time runs out the room resets and items are lost, but the clues the player found are kept.
 
@@ -55,4 +55,4 @@ Then test from the console with calls like `onObjectClick("note")` and `onObject
 - [ ] The full chain note → painting ×4 → key → cabinet → photo → computer → door wins
 - [ ] Clicking the cabinet before getting the key says it's locked
 - [ ] No console errors
-- [ ] A PR from your branch that says `Closes #1, closes #3`
+- [ ] A PR from `issue-1-3-mechanics` that says `Closes #1, closes #3`

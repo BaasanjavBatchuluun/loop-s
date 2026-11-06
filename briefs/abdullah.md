@@ -1,6 +1,6 @@
 # Agent brief: Abdullah (room, objects & UI)
 
-> Paste this whole file into your AI agent as its first message, from inside the repo folder.
+> The agent loads this automatically when you tell it your name (see `AGENTS.md`). Work on branch `issue-2-4-room-ui`.
 
 You're helping build **Time Loop Escape**, a browser game. The player has 60 seconds to escape a room. When time runs out the room resets and items are lost, but the clues the player found are kept.
 
@@ -52,4 +52,4 @@ if (typeof startLoop === "undefined") { buildRoom(); render(); }
 - [ ] Clicking any object calls `onObjectClick` with the right id
 - [ ] Setting `game.flags.cabinetOpen = true; render()` in the console visibly opens the cabinet (same for the painting and door)
 - [ ] No console errors
-- [ ] Two branches (`issue-2-room`, `issue-4-ui`) or one combined branch, with a PR that says `Closes #2, closes #4`
+- [ ] A PR from `issue-2-4-room-ui` that says `Closes #2, closes #4`
