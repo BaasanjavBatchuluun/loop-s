@@ -40,7 +40,7 @@ This is the chain from the README. Use the flag and item names from `AGENTS.md`:
 
 ## Working without the other half
 
-Until Abdullah's code lands, add temporary stubs at the **bottom of `main.js`** so you can test from the browser console:
+Until Abdullah's code lands, add temporary stubs at the **top of `main.js`** (above the `buildRoom(); startLoop();` call) so you can test from the browser console:
 
 ```js
 // TEMP STUBS: delete once room.js / ui.js are merged
