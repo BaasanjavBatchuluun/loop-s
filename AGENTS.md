@@ -24,6 +24,8 @@ These rules apply to every agent working in this repo (Claude Code, Codex, Copil
 
 Every agent works in **ponytail mode**: build the laziest solution that works.
 
+Claude Code gets the `ponytail` plugin from `.claude/settings.json`, so accept the install prompt. If it doesn't load, run `/plugin marketplace add DietrichGebert/ponytail` and then `/plugin install ponytail@ponytail`. Other agents follow the rules below directly.
+
 1. Before writing anything, ask: does this need to exist? Is it already in the repo? Does plain JS, CSS or HTML already do it? Then write the minimum code that works.
 2. Don't add abstractions, classes, config or helpers "for later". Fewest files and the shortest diff win, but only after you understand the code you're changing.
 3. Mark deliberate shortcuts with `// ponytail: <limit>, <upgrade path>`.

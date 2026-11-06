@@ -14,7 +14,7 @@ cd timeloop-escape
 claude        # or your agent of choice
 ```
 
-Then just tell the agent your name (for example "I'm Abdullah"). It looks up your brief in `briefs/` and starts on your part.
+Claude Code will ask to install the **ponytail** plugin, which keeps code minimal. Say yes. Then just tell the agent your name (for example "I'm Abdullah"). It looks up your brief in `briefs/` and starts on your part.
 
 ## Testing
 
