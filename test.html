@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>QA tests</title>
+  <style>body{font-family:monospace;background:#111;color:#eee} .ok{color:#6c6} .bad{color:#f66}</style>
+</head>
+<body>
+  <!-- Same markup as index.html: keep in sync -->
+  <div id="hud"><span id="timer"></span><span id="loop-count"></span></div>
+  <div id="room"></div>
+  <div id="message"></div>
+  <div id="inventory"></div>
+  <div id="journal"></div>
+
+  <h1 id="result">running…</h1>
+  <ol id="log"></ol>
+
+  <script src="js/state.js"></script>
+  <script src="js/room.js"></script>
+  <script src="js/puzzles.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+  // QA smoke test for the shared contract in AGENTS.md. Open in a browser; CI runs it headless.
+  // ponytail: one linear script, split into cases if it grows past ~100 lines.
+  window.prompt = () => window.__answer;   // computer asks for a password
+  window.alert = () => {};
+  const log = (ok, name, err) => {
+    const li = document.createElement("li");
+    li.className = ok ? "ok" : "bad";
+    li.textContent = (ok ? "PASS " : "FAIL ") + name + (err ? " — " + err : "");
+    document.getElementById("log").append(li);
+    return ok;
+  };
+  const check = (name, fn) => { try { const r = fn(); return log(r !== false, name, r === false ? "assertion false" : ""); } catch (e) { return log(false, name, e.message); } };
+  const click = (id) => onObjectClick(id);
+
+  window.addEventListener("load", () => {  // registered after main.js, so the game has already started
+    let year;
+    const results = [
+      check("contract functions exist", () => ["buildRoom","onObjectClick","startLoop","resetLoop","addItem","hasItem","addClue","setFlag","say","render"].every(f => typeof window[f] === "function" || (()=>{throw new Error(f + " missing")})())),
+      check("starts on loop 1 with ≤60s", () => game.loop === 1 && game.timeLeft <= 60 && game.timeLeft > 50),
+      check("room has all puzzle objects", () => ["note","painting","cabinet","photo","computer","door"].every(id => document.getElementById("obj-" + id) || (()=>{throw new Error("#obj-" + id + " missing")})())),
+      check("clicking #obj-note element adds BLUE - 4", () => { document.getElementById("obj-note").click(); return game.clues.includes("BLUE - 4"); }),
+      check("note clue not duplicated", () => { click("note"); return game.clues.filter(c => c === "BLUE - 4").length === 1; }),
+      check("cabinet locked without key", () => { click("cabinet"); return !game.flags.cabinetOpen && game.message !== ""; }),
+      check("painting ×3 gives nothing", () => { click("painting"); click("painting"); click("painting"); return !hasItem("key") && !game.flags.paintingMoved; }),
+      check("painting ×4 reveals key", () => { click("painting"); return hasItem("key") && game.flags.paintingMoved === true; }),
+      check("cabinet opens with key, gives photo clue", () => { click("cabinet"); return game.flags.cabinetOpen === true && game.clues.includes("Find the year on the photograph"); }),
+      check("photo shows a year", () => { click("photo"); year = (game.message.match(/\b(1[89]\d\d|20\d\d)\b/) || [])[1]; return !!year; }),
+      check("door locked before computer", () => { click("door"); return !game.won; }),
+      check("wrong password rejected", () => { window.__answer = "0000"; click("computer"); return !game.flags.doorUnlocked; }),
+      check("right password unlocks door", () => { window.__answer = year; click("computer"); return game.flags.doorUnlocked === true; }),
+      check("door wins", () => { click("door"); return game.won === true; }),
+      check("decoy click doesn't throw", () => { click("not-a-real-object"); }),
+      check("reset: items/flags/message cleared, clues kept, loop+1", () => {
+        const clues = [...game.clues];
+        resetLoop();
+        return game.items.length === 0 && Object.keys(game.flags).length === 0 && game.message === "" && game.won === false
+          && game.loop === 2 && game.timeLeft === 60 && clues.every(c => game.clues.includes(c));
+      }),
+      check("render() after reset doesn't throw", () => { render(); }),
+    ];
+    const pass = results.every(Boolean);
+    const el = document.getElementById("result");
+    el.textContent = pass ? "ALL PASS" : "FAILED";
+    el.className = pass ? "ok" : "bad";
+    document.title = pass ? "QA: ALL PASS" : "QA: FAILED";
+  });
+  </script>
+</body>
+</html>

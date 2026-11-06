@@ -8,6 +8,7 @@ The human will start the session by telling you their name. Match it to a brief,
 |---|---|
 | Abdullah, Abdallah, abdullahwaseem6 | `briefs/abdullah.md` |
 | Baasanjav, BaasanjavBatchuluun | `briefs/baasanjav.md` |
+| Zaid, zaid-akroush | `briefs/zaid.md` (QA and integration) |
 
 Then:
 1. Run `git switch main && git pull` to get the latest code.
@@ -37,6 +38,7 @@ If the task seems to need a change in someone else's file, don't make it. Stop a
 - `game` in `js/state.js` is the only shared state. Don't create other global state.
 - `items`, `flags`, `message` and `won` reset every loop. `clues` persist across loops. That rule is the whole game, so never clear `clues` on reset.
 - Don't rename or remove anything below without an agreement on the issue first.
+- Declare contract functions with `function name() {}`, not `const name = () =>`. The QA test looks them up on `window`.
 
 **Who defines what**
 
@@ -67,3 +69,5 @@ If the task seems to need a change in someone else's file, don't make it. Stop a
 - Work on a branch per issue (for example `git switch -c issue-3-puzzles`). Never push to `main`.
 - Open a pull request that says `Closes #N`, and keep it limited to that issue's files.
 - Before finishing, open `index.html` in a browser and check that the console has no errors.
+- Open `test.html` too. Every test for your half must pass. Tests for the other person's half may fail until their code is merged.
+- The QA workflow runs `test.html` on every push and PR. It stays red until both halves are on `main`.

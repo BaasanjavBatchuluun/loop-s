@@ -16,6 +16,10 @@ claude        # or your agent of choice
 
 Then just tell the agent your name (for example "I'm Abdullah"). It looks up your brief in `briefs/` and starts on your part.
 
+## Testing
+
+Open `test.html` in a browser. It plays the full escape sequence and the loop reset, then shows PASS or FAIL for each step. GitHub Actions runs the same page on every push and PR.
+
 ## Escape sequence (first room)
 
 1. Find the clue **"BLUE - 4"**, then click the blue painting 4 times. It moves aside and reveals a key.
@@ -30,6 +34,7 @@ Each person owns one file, which keeps merge conflicts rare.
 
 | Area | Files | Owner |
 |---|---|---|
+| QA and integration: tests, PR review, making the halves fit | `test.html`, `.github/` | @zaid-akroush |
 | Core loop: timer, reset, knowledge that persists | `js/state.js`, `js/main.js` | @BaasanjavBatchuluun |
 | Room & objects: layout, art, clickable objects | `js/room.js`, `assets/` | @abdullahwaseem6 |
 | Puzzles: painting, cabinet, photo, computer, door | `js/puzzles.js` | @BaasanjavBatchuluun |
