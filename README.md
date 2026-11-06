@@ -1,0 +1,40 @@
+# Time Loop Escape
+
+You're trapped in a room with 60 seconds to escape. When the timer hits zero the room resets and your items disappear, **but you keep every clue you found.** Each loop teaches you a bit more until you know the full escape sequence.
+
+## Run it
+
+Open `index.html` in a browser. No install or build step.
+
+## Escape sequence (first room)
+
+1. Find the clue **"BLUE - 4"**, then click the blue painting 4 times. It moves aside and reveals a key.
+2. Use the key to open the cabinet. Inside is the clue **"Find the year on the photograph"**.
+3. Find the year on the photograph.
+4. Type the year as the password on the computer. This unlocks the exit door.
+5. Walk out.
+
+## Who owns what
+
+Each person owns one file, which keeps merge conflicts rare.
+
+| Area | Files | Owner |
+|---|---|---|
+| Core loop: timer, reset, knowledge that persists | `js/state.js`, `js/main.js` | _TBD_ |
+| Room & objects: layout, art, clickable objects | `js/room.js`, `assets/` | _TBD_ |
+| Puzzles: painting, cabinet, photo, computer, door | `js/puzzles.js` | _TBD_ |
+| UI: HUD, inventory, clue journal, end screens | `js/ui.js`, `style.css` | _TBD_ |
+
+## Shared contract
+
+`game` in `js/state.js` is the only shared state:
+
+- `items` and `flags` **reset** every loop.
+- `clues` **persist** across loops.
+
+Room calls `onObjectClick(id)`, and puzzles call the state functions (`addItem`, `addClue`, …). After any change, UI's `render()` redraws the screen. If you need a new field or function, agree on it in the issue first.
+
+## Workflow
+
+- Make a branch for each issue (`git switch -c timer`), then open a PR into `main`.
+- Don't push to `main` directly.
